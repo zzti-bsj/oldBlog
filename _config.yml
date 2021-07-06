@@ -5,7 +5,7 @@
 # Site
 title: Bsj's Blog
 subtitle: ''
-description: 'otnw, create worth and implement rich free'
+description: ''
 keywords: IT
 author: Shaojie
 language: zh-Hans
@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://zzti-bsj.github.io/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
