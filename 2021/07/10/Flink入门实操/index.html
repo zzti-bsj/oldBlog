@@ -4,16 +4,27 @@
   <meta charset="utf-8">
   
   
-  <title>Bsj&#39;s Blog</title>
+  <title>Flink入门实操 | Bsj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Bsj&#39;s Blog">
-<meta property="og:url" content="https://zzti-bsj.github.io/index.html">
+  <meta name="description" content="Flink入门实操Flink是一个可扩展的流数据处理框架。通过这篇指导将会了解如何编写流处理数据仓库(scalable streaming ETL)、分析以及事件驱动程序。 通过这篇指导，将会了解以下关于Flink的技术实现：  流数据处理管道 flink状态管理机制 利用活动时间持续计算正确的分析 在连续的流上构建事件处理驱动 具有一次语义的容错、有状态流处理  这篇指导聚焦于四个重要的概念：流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flink入门实操">
+<meta property="og:url" content="https://zzti-bsj.github.io/2021/07/10/Flink%E5%85%A5%E9%97%A8%E5%AE%9E%E6%93%8D/index.html">
 <meta property="og:site_name" content="Bsj&#39;s Blog">
+<meta property="og:description" content="Flink入门实操Flink是一个可扩展的流数据处理框架。通过这篇指导将会了解如何编写流处理数据仓库(scalable streaming ETL)、分析以及事件驱动程序。 通过这篇指导，将会了解以下关于Flink的技术实现：  流数据处理管道 flink状态管理机制 利用活动时间持续计算正确的分析 在连续的流上构建事件处理驱动 具有一次语义的容错、有状态流处理  这篇指导聚焦于四个重要的概念：流">
 <meta property="og:locale">
+<meta property="og:image" content="https://zzti-bsj.github.io/2021/07/10/images/flink1.png">
+<meta property="og:image" content="https://zzti-bsj.github.io/2021/07/10/images/flink2.svg">
+<meta property="og:image" content="https://zzti-bsj.github.io/2021/07/10/images/flink3.png">
+<meta property="og:image" content="https://zzti-bsj.github.io/2021/07/10/images/parallel_dataflow.svg">
+<meta property="og:image" content="https://zzti-bsj.github.io/2021/07/10/images/parallel-job.png">
+<meta property="og:image" content="https://zzti-bsj.github.io/2021/07/10/images/local-state.png">
+<meta property="article:published_time" content="2021-07-10T08:19:46.061Z">
+<meta property="article:modified_time" content="2021-07-10T08:19:46.061Z">
 <meta property="article:author" content="Shaojie">
-<meta property="article:tag" content="IT">
+<meta property="article:tag" content="Flink">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zzti-bsj.github.io/2021/07/10/images/flink1.png">
   
     <link rel="alternate" href="/atom.xml" title="Bsj's Blog" type="application/atom+xml">
   
@@ -66,52 +77,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-ETL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/07/10/ETL/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T08:19:46.061Z" itemprop="datePublished">2021-07-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/07/10/ETL/">ETL</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="ETL"><a href="#ETL" class="headerlink" title="ETL"></a>ETL</h2><p>ETL 是 extract-transform-load的缩写，用来描述将数据从来源端经过抽取、转换、加载至目的端的过程。是数据仓库有关的技术。</p>
-<p>ETL是将业务系统的数据经过抽取、清洗转换之后加载到数据仓库的过程，目的是将企业零散、标准不一的数据整合到一起，为企业的决策提供分析依据。ETL是BI(商业智能)的一个重要环节。</p>
-<p>对于这种技术，一般常见的是ETL和ELT混合使用，通常越大量的数据、复杂的转换逻辑、目的端为较强运算能力的数据库，越偏向使用ELT，以便运用目的端数据库的平行处理能力。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/10/ETL/" data-id="ckqxhz3se00012iktf1wef7qd" data-title="ETL" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Open-Tech/" rel="tag">Open-Tech</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Flink入门实操" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Flink入门实操" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/10/Flink%E5%85%A5%E9%97%A8%E5%AE%9E%E6%93%8D/" class="article-date">
   <time class="dt-published" datetime="2021-07-10T08:19:46.061Z" itemprop="datePublished">2021-07-10</time>
@@ -124,8 +90,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/07/10/Flink%E5%85%A5%E9%97%A8%E5%AE%9E%E6%93%8D/">Flink入门实操</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Flink入门实操
     </h1>
   
 
@@ -189,118 +155,28 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-[Hexo] 设置标签" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/07/10/%5BHexo%5D%20%E8%AE%BE%E7%BD%AE%E6%A0%87%E7%AD%BE/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T08:19:46.061Z" itemprop="datePublished">2021-07-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2021/07/10/ETL/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/07/10/%5BHexo%5D%20%E8%AE%BE%E7%BD%AE%E6%A0%87%E7%AD%BE/">在博客的根目录下创建tags目录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="在博客的根目录下创建tags目录"><a href="#在博客的根目录下创建tags目录" class="headerlink" title="在博客的根目录下创建tags目录"></a>在博客的根目录下创建tags目录</h2><ol>
-<li>创建tags目录</li>
-</ol>
-<p><code>hexo new page tags</code></p>
-<ol start="2">
-<li><p>设置tags/index.html</p>
-<p>在index.html中加上type: “tags”</p>
-<pre><code class="shell">---
-title: tags
-date: 2021-07-06 23:44:14
-type: &quot;tags&quot;
----
-</code></pre>
-</li>
-</ol>
-<h2 id="创建categories目录"><a href="#创建categories目录" class="headerlink" title="创建categories目录"></a>创建categories目录</h2><p>同创建tags目录的方式一样，把关键字tags换成categories即可。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/10/[Hexo]%20%E8%AE%BE%E7%BD%AE%E6%A0%87%E7%AD%BE/" data-id="ckqxhz3sl00052iktdkdkdhme" data-title="在博客的根目录下创建tags目录" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/07/10/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T08:19:46.061Z" itemprop="datePublished">2021-07-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+          ETL
         
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/07/10/hello-world/">Hello World</a>
-    </h1>
   
+    <a href="/2021/07/10/%5BHexo%5D%20%E8%AE%BE%E7%BD%AE%E6%A0%87%E7%AD%BE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">在博客的根目录下创建tags目录</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/10/hello-world/" data-id="ckqxhz3sm00062ikt6xs99w1r" data-title="Hello World" class="article-share-link">Teilen</a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
 
 
 </section>
