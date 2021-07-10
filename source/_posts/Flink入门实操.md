@@ -1,3 +1,7 @@
+---
+title: Flink入门实操
+tags: Flink
+---
 ## Flink入门实操
 
 Flink是一个可扩展的流数据处理框架。通过这篇指导将会了解如何编写流处理数据仓库(scalable streaming ETL)、分析以及事件驱动程序。
