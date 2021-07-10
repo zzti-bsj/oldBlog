@@ -71,7 +71,7 @@
     <article id="post-ETL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/10/ETL/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T15:11:29.029Z" itemprop="datePublished">2021-07-10</time>
+  <time class="dt-published" datetime="2021-07-10T17:06:48.501Z" itemprop="datePublished">2021-07-10</time>
 </a>
     
   </div>
@@ -97,7 +97,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/10/ETL/" data-id="ckqxwok9y000122y2cqgfaqdf" data-title="ETL" class="article-share-link">Teilen</a>
+      <a data-url="https://zzti-bsj.github.io/2021/07/10/ETL/" data-id="ckqy0svs30001y4oudp0e7ox0" data-title="ETL" class="article-share-link">Teilen</a>
       
       
       
@@ -114,7 +114,7 @@
     <article id="post-Flink入门实操" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/10/Flink%E5%85%A5%E9%97%A8%E5%AE%9E%E6%93%8D/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T15:11:29.029Z" itemprop="datePublished">2021-07-10</time>
+  <time class="dt-published" datetime="2021-07-10T17:06:48.501Z" itemprop="datePublished">2021-07-10</time>
 </a>
     
   </div>
@@ -180,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/10/Flink%E5%85%A5%E9%97%A8%E5%AE%9E%E6%93%8D/" data-id="ckqxwoka2000322y241tf5o2l" data-title="Flink入门实操" class="article-share-link">Teilen</a>
+      <a data-url="https://zzti-bsj.github.io/2021/07/10/Flink%E5%85%A5%E9%97%A8%E5%AE%9E%E6%93%8D/" data-id="ckqy0svs60003y4ou1urs7ia4" data-title="Flink入门实操" class="article-share-link">Teilen</a>
       
       
       
@@ -197,7 +197,7 @@
     <article id="post-Flink的三种模式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/10/Flink%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T15:11:29.029Z" itemprop="datePublished">2021-07-10</time>
+  <time class="dt-published" datetime="2021-07-10T17:06:48.501Z" itemprop="datePublished">2021-07-10</time>
 </a>
     
   </div>
@@ -208,7 +208,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/07/10/Flink%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/">Flink的三种模式</a>
+      <a class="p-name article-title" href="/2021/07/10/Flink%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/">Flink概览-three modes</a>
     </h1>
   
 
@@ -216,23 +216,79 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Flink的三种模式"><a href="#Flink的三种模式" class="headerlink" title="Flink的三种模式"></a>Flink的三种模式</h2><p>Flink一共有三种处理数据的模式：</p>
+        <h2 id="Flink概览-three-mode"><a href="#Flink概览-three-mode" class="headerlink" title="Flink概览-three mode"></a>Flink概览-three mode</h2><p>Flink是一个具有多用途的框架，支持许多不同的部署场景。</p>
+<p>接下来，将会短暂地介绍一个FLink集群的构成要素，以及它们的目标和可用的技术实现。</p>
+<h3 id="概览和参考架构"><a href="#概览和参考架构" class="headerlink" title="概览和参考架构"></a>概览和参考架构</h3><p><img src="/images/deployment_overview.svg"></p>
+<p>在Flink的集群中，总有一个client在运行。client获取应用程序的代码，并且将其转化成JobGraph提交给JobManager进行处理。</p>
 <ul>
+<li>JobManager: 将任务分布到TaskManager，TaskManager的主要任务就是来处理提交的任务，如下图的过程是在TaskManager中执行的。</li>
+</ul>
+<p><img src="/images/parallel_dataflow.svg"></p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th align="left">Purpose</th>
+<th>Implementations</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Flink Client</td>
+<td align="left">将批处理或流应用程序编译成数据流图，然后提交到JobManager</td>
+<td>command line nterface<br />REST Endpoint<br />SQL Client<br />Python REPL<br />Scala REPL</td>
+</tr>
+<tr>
+<td>JobManager</td>
+<td align="left">JobManager是Flink核心工作的协调组件，其具有对于不同资源提供者的实现方式，在HA、资源分配行为以及支持作业的提交模式上有所不同，用于提交Job的三种JobManager模式：1. Session mode 2. Application mode 3. Per-job mode</td>
+<td>1. standalone(这种准系统模式只要求JVM能够运行。可以部署在多种环境下，如：k8s、Docker、non-native k8s等等)<br />2. Kubernetes<br />3. YARN<br />4. Mesos</td>
+</tr>
+<tr>
+<td>TaskManager</td>
+<td align="left">TaskManager负责真正的执行提交的Job</td>
+<td></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Exeternal Components 暂时不更新</p>
+</blockquote>
+<h3 id="Flink的三种部署模式"><a href="#Flink的三种部署模式" class="headerlink" title="Flink的三种部署模式"></a>Flink的三种部署模式</h3><ul>
 <li>session mode</li>
 <li>application mode</li>
 <li>per-job mode</li>
 </ul>
-<p>Flink是一个具有多用途的框架，支持许多不同的部署场景。</p>
-<p>接下来，将会短暂地介绍一个FLink集群的构成要素，以及它们的目标和可用的技术实现。</p>
-<h3 id="概览和参考架构"><a href="#概览和参考架构" class="headerlink" title="概览和参考架构"></a>概览和参考架构</h3><p>在Flink的集群中，总有一个client在运行。client获取应用程序的代码，并且将其转化成JobGraph提交给JobManager进行处理。</p>
+<p>三种模式的不同在于：</p>
 <ul>
-<li>JobManager: 将任务分布到TaskManager，TaskManager的主要任务就是来处理提交的任务，如下图的过程是在TaskManager中执行的。</li>
+<li>集群的生命周期和资源的隔离保证</li>
+<li>Job的main()方法是在client端执行还是在Flink集群上执行</li>
 </ul>
+<p><img src="../images/deployment_modes.svg"></p>
+<p>Application mode: 启动一个jobmanager执行任务；Flink applicaiton运行在jobmanager上。</p>
+<p>Per-job mode: 启动一个jobmanager执行任务；Flink application运行在提交任务的集群client上。</p>
+<p>Session mode: 多个任务共享一个jobmanager</p>
+<h4 id="Application-mode"><a href="#Application-mode" class="headerlink" title="Application mode"></a>Application mode</h4><p>在<strong>其他两种模式中，应用程序的main()方法在client端执行</strong>。这个程序包括在本地下载应用程序的依赖，执行main()函数提取一个Flink运行时可以理解的表现形式(如JobGraph)，然后将依赖和JobGraph提交到集群。下载依赖、CPU执行main()的周期以及发送二进制数据到集群会给client端带来巨大的网络开销，当客户端在用户之间共享时，这个问题会更加明显。</p>
+<p>基于这一观察，<strong>Application mode为每一个提交的应用程序创建一个集群，同时main()方法在JobManager上执行</strong>。为每个应用程序创建一个集群可以被看作：创建一个仅在特定应用程序的作业之间共享的会话集群，并在应用程序完成时拆除。在这种架构下，Application mode提供了与Per-job mode相同的资源隔离和负载均衡的保证（但是是以整个应用程序的颗粒进行资源隔离和负载均衡的保证）。在JobManager上执行main()可以节省所需的CPU执行周期以及本地下载依赖所需的带宽。因为每一个应用程序（每一个为应用程序创建的Flink集群）都有一个Jobmanager，所以它允许更均匀地分散网络负载以下载应用程序中的依赖项。</p>
+<blockquote>
+<p>在Application mode中，main()方法是在cluster上执行的，而不是在client端执行的。(与其他两种模式一样在cluster端执行)</p>
+</blockquote>
+<p>相比于Per-job mode，Application mode允许提交的应用程序中包含多个job。job的执行不受部署模式的影响，而是受启动作业的调用程序的影响。例如：使用<code>execut()</code>调用job，将会阻塞直到当前任务完成之后再调用下一个任务；使用<code>executeAsync()</code>调用job(异步任务)，将会在当前任务完成之前启动下一个任务。</p>
+<blockquote>
+<ol>
+<li><p>Application mode允许多个execute()，但多exectue()不支持HA。HA在application mode下只支持单个execute()</p>
+</li>
+<li><p>当Application mode下的多个正在运行的作业(例如executeAsync()提交的多个job)中的任何一个被取消时，所有作业都将停止并且Jobmanager将会关闭。支持定期作业完成(通过源关闭)</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="Per-job-mode"><a href="#Per-job-mode" class="headerlink" title="Per-job mode"></a>Per-job mode</h3><p>Per-job mode意在提供更好的资源隔离的保证。Per-job使用可利用的资源提供者框架为每一个提交的job创建一个集群，这个被创建的集群只为提交的这个job可用。当且仅当这个Job执行完成之后，这个集群将会被拆除，并且分配的资源被清理。这提供了更好的资源隔离，因为异常的Job只能关闭它的TaskManager。此外，它将book-keeping(一些元数据的记录)分配到每一个Jobmanager中，由于这个原因，Per-job mode资源分配模型是许多生产原因的首选模式。</p>
+<h3 id="Session-mode"><a href="#Session-mode" class="headerlink" title="Session mode"></a>Session mode</h3><p>Session mode假定已经存在一个正在运行的Flink集群，并且使用该集群中的资源去执行任何被提交的应用程序。在同一Session mode集群中执行的应用程序竞争资源使用。这样做的好处是不用为每个提交的Job创建集群而花费资源开销。但坏处是，如果有一个Job异常并且关闭了Taskmanager，那么在这个Taskmanager上运行的所有Job将会失败。除了可能会导致作业失败之外，还意味着具有潜在的大规模恢复过程，所有重新启动的任务同时访问文件系统而导致其他服务无法使用该文件系统。此外，让单个集群运行多个作业，意味着Jobmanager的负载更大，后者负责集群中所有作业的book-keeping。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在Session mode中，集群的生命周期独立于任何运行在集群上的Job，并且资源在所有Job之间共享。</p>
+<p>在Per-job mode中，为每一个提交的job花费开销创建集群，达到了资源隔离的目的。在这种模式下，集群的生命周期与Job绑定。</p>
+<p>在Application mode中，为每一个应用程序创建一个Session集群，并且在cluster(Jobmanager)上执行<code>main()</code>方法。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/10/Flink%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/" data-id="ckqxwoka5000522y29dg80bva" data-title="Flink的三种模式" class="article-share-link">Teilen</a>
+      <a data-url="https://zzti-bsj.github.io/2021/07/10/Flink%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/" data-id="ckqy0svs90005y4ougief6sws" data-title="Flink概览-three modes" class="article-share-link">Teilen</a>
       
       
       
@@ -249,7 +305,7 @@
     <article id="post-[Hexo] 设置标签" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/10/%5BHexo%5D%20%E8%AE%BE%E7%BD%AE%E6%A0%87%E7%AD%BE/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T15:11:29.029Z" itemprop="datePublished">2021-07-10</time>
+  <time class="dt-published" datetime="2021-07-10T17:06:48.501Z" itemprop="datePublished">2021-07-10</time>
 </a>
     
   </div>
@@ -288,7 +344,7 @@ type: &quot;tags&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/10/[Hexo]%20%E8%AE%BE%E7%BD%AE%E6%A0%87%E7%AD%BE/" data-id="ckqxwoka6000622y24cme963o" data-title="在博客的根目录下创建tags目录" class="article-share-link">Teilen</a>
+      <a data-url="https://zzti-bsj.github.io/2021/07/10/[Hexo]%20%E8%AE%BE%E7%BD%AE%E6%A0%87%E7%AD%BE/" data-id="ckqy0svsa0006y4ouht246km3" data-title="在博客的根目录下创建tags目录" class="article-share-link">Teilen</a>
       
       
       
@@ -305,7 +361,7 @@ type: &quot;tags&quot;
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/10/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T15:11:29.029Z" itemprop="datePublished">2021-07-10</time>
+  <time class="dt-published" datetime="2021-07-10T17:06:48.501Z" itemprop="datePublished">2021-07-10</time>
 </a>
     
   </div>
@@ -341,7 +397,7 @@ type: &quot;tags&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/10/hello-world/" data-id="ckqxwoka7000722y22lc2h77n" data-title="Hello World" class="article-share-link">Teilen</a>
+      <a data-url="https://zzti-bsj.github.io/2021/07/10/hello-world/" data-id="ckqy0svsb0007y4ou8y8w64ku" data-title="Hello World" class="article-share-link">Teilen</a>
       
       
       
@@ -406,7 +462,7 @@ type: &quot;tags&quot;
           </li>
         
           <li>
-            <a href="/2021/07/10/Flink%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/">Flink的三种模式</a>
+            <a href="/2021/07/10/Flink%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/">Flink概览-three modes</a>
           </li>
         
           <li>
