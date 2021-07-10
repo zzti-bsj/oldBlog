@@ -71,7 +71,7 @@
     <article id="post-ETL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/10/ETL/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T08:22:42.848Z" itemprop="datePublished">2021-07-10</time>
+  <time class="dt-published" datetime="2021-07-10T08:29:58.208Z" itemprop="datePublished">2021-07-10</time>
 </a>
     
   </div>
@@ -97,7 +97,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/10/ETL/" data-id="ckqxi2w3p0001wsqbh0e0dlaq" data-title="ETL" class="article-share-link">Teilen</a>
+      <a data-url="https://zzti-bsj.github.io/2021/07/10/ETL/" data-id="ckqxic7mz0001z6p318xxgg8t" data-title="ETL" class="article-share-link">Teilen</a>
       
       
       
@@ -114,7 +114,7 @@
     <article id="post-Flink入门实操" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/10/Flink%E5%85%A5%E9%97%A8%E5%AE%9E%E6%93%8D/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T08:22:42.848Z" itemprop="datePublished">2021-07-10</time>
+  <time class="dt-published" datetime="2021-07-10T08:29:58.208Z" itemprop="datePublished">2021-07-10</time>
 </a>
     
   </div>
@@ -144,17 +144,17 @@
 </ul>
 <p>这篇指导聚焦于四个重要的概念：流数据的持续处理、事件时间、有状态的流处理、状态简要说明。</p>
 <h3 id="流处理"><a href="#流处理" class="headerlink" title="流处理"></a>流处理</h3><p>流是数据的自然形态(natural habitat)，无论是服务端的事件、证劵交易所的交易、传感器读取的数据，这些数据都作为流的一部分被创建。你可以在有界或者无界的流范围内组织处理，而所选择的每一种处理形式都具有巨大的重要意义。</p>
-<p><img src="../images/flink1.png"></p>
+<p><img src="/images/flink1.png"></p>
 <p><strong>批处理有范围的数据流模式</strong>：在这种模式下，你能够在产生结果之前引入所有的数据集，这意味着可以对数据排序、计算全局统计报告或生成总结所有输入的最终报告。</p>
 <p><strong>流处理模式</strong>：对于没有范围的流数据，应该在这些数据到来的时候持续处理。</p>
 <p>在Flink中，这些流数据流(streaming dataflows)可以由用户定义的操作符进行转换。这些数据流形成以一个或多个以source开始且以一个或多个sink结束的有向图。</p>
-<p><img src="../images/flink2.svg"></p>
+<p><img src="/images/flink2.svg"></p>
 <p>通常，在编码转换和数据流操作之间的通信是一对一的。有时一个转换包含多个操作。</p>
 <p>应用程序可能会使用来自<strong>流源</strong>(如消息队列和分布式日志，例如：Apache、Kafka、Kinesis)的数据。同时Flink可以处理来自不同源的有范围历史数据。通过Flink框架进行流处理的结果可以被发送到多种系统中作为sink连接。</p>
-<p><img src="../images/flink3.png"></p>
+<p><img src="/images/flink3.png"></p>
 <h3 id="并行数据流"><a href="#并行数据流" class="headerlink" title="并行数据流"></a>并行数据流</h3><p>Flink中的程序本质上是并行与分布式的。在执行期间，一个流(stream)具有一个或多个流分区，且一个操作任务具有一个或多个子任务。每一个子任务独立于其他的子任务在线程、容器、节点上执行。</p>
 <p>运算符子任务的数量是该特定运算符的并行度。不同的操作符在相同的编码中可能具有不同的并行级别。</p>
-<p><img src="../images/parallel_dataflow.svg"></p>
+<p><img src="/images/parallel_dataflow.svg"></p>
 <p>stream可以通过一对一的模式(或者转发模式、重新分配模式)在两个操作之间传输数据：</p>
 <ul>
 <li>one-to-one streams：维持流的分区不变以及元素的排序的特性(例如在上面图中的<code>Source</code>和<code>map()</code>运算之间)。这意味着map()的subtask[1]将会看到Source的subtask[1]生成的元素。</li>
@@ -167,9 +167,9 @@
 <p>一个Flink应用并行运行在一个分布式系统上。在基于同一个给定的操作下的多个并行实例将会在不同的线程甚至不同的机器上独立执行。</p>
 <p>一个有状态运算符的并行实例集合实际上是一个分片键值存储。每个并行实例负责处理特定key的事件，并且这些key的状态保存在本地。</p>
 <p>下图显示一个作业在图中的前三个操作符上以2的并行度运行，并且在一个并行度为1的sink结束。第三个过程是有状态的，这里第二个操作正在和第三个操作进行网络的全连接，这样做是为了根据key对流进行分区，以便需要被处理的数据能够一起被处理。</p>
-<p><img src="../images/parallel-job.png"></p>
+<p><img src="/images/parallel-job.png"></p>
 <p>在本地访问状态，有助于帮助Flink应用提高吞吐量和降低延迟。（可以考虑将状态保持在JVM heap，如果状态过大，可以存储在有效组织的磁盘数据结构中）</p>
-<p><img src="../images/local-state.png"></p>
+<p><img src="/images/local-state.png"></p>
 <h3 id="通过状态快照的容错"><a href="#通过状态快照的容错" class="headerlink" title="通过状态快照的容错"></a>通过状态快照的容错</h3><p>Flink通过状态快照(state snapshot)和流重播(streams replay)的连接提供容错(fault-tolerant)和消息的精确一次(exactly-once)。</p>
 <p>这些state snapshot捕捉分布式管道的整个状态，将偏移量记录到输入队列中，以及在整个作业图中记录到该点为止由于摄取数据而产生的状态。当发生故障时，源被倒回，状态被恢复，并且重新开始处理。如上描述的这个过程的状态快照是异步捕获的，不会妨碍正在进行的处理。</p>
 <hr>
@@ -180,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/10/Flink%E5%85%A5%E9%97%A8%E5%AE%9E%E6%93%8D/" data-id="ckqxi2w3s0003wsqb27rygzsc" data-title="Flink入门实操" class="article-share-link">Teilen</a>
+      <a data-url="https://zzti-bsj.github.io/2021/07/10/Flink%E5%85%A5%E9%97%A8%E5%AE%9E%E6%93%8D/" data-id="ckqxic7n50003z6p38vxhhp78" data-title="Flink入门实操" class="article-share-link">Teilen</a>
       
       
       
@@ -197,7 +197,7 @@
     <article id="post-[Hexo] 设置标签" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/10/%5BHexo%5D%20%E8%AE%BE%E7%BD%AE%E6%A0%87%E7%AD%BE/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T08:22:42.848Z" itemprop="datePublished">2021-07-10</time>
+  <time class="dt-published" datetime="2021-07-10T08:29:58.208Z" itemprop="datePublished">2021-07-10</time>
 </a>
     
   </div>
@@ -236,7 +236,7 @@ type: &quot;tags&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/10/[Hexo]%20%E8%AE%BE%E7%BD%AE%E6%A0%87%E7%AD%BE/" data-id="ckqxi2w3v0005wsqb3g0dekkm" data-title="在博客的根目录下创建tags目录" class="article-share-link">Teilen</a>
+      <a data-url="https://zzti-bsj.github.io/2021/07/10/[Hexo]%20%E8%AE%BE%E7%BD%AE%E6%A0%87%E7%AD%BE/" data-id="ckqxic7n90005z6p3hruw6o3b" data-title="在博客的根目录下创建tags目录" class="article-share-link">Teilen</a>
       
       
       
@@ -253,7 +253,7 @@ type: &quot;tags&quot;
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2021/07/10/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-07-10T08:22:42.848Z" itemprop="datePublished">2021-07-10</time>
+  <time class="dt-published" datetime="2021-07-10T08:29:58.208Z" itemprop="datePublished">2021-07-10</time>
 </a>
     
   </div>
@@ -289,7 +289,7 @@ type: &quot;tags&quot;
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/10/hello-world/" data-id="ckqxi2w3w0006wsqb4bqz5ua5" data-title="Hello World" class="article-share-link">Teilen</a>
+      <a data-url="https://zzti-bsj.github.io/2021/07/10/hello-world/" data-id="ckqxic7nb0006z6p3dnsw17ce" data-title="Hello World" class="article-share-link">Teilen</a>
       
       
       
