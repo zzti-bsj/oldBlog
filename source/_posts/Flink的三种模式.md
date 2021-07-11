@@ -40,7 +40,7 @@ Flink是一个具有多用途的框架，支持许多不同的部署场景。
 * 集群的生命周期和资源的隔离保证
 * Job的main()方法是在client端执行还是在Flink集群上执行
 
-![](../images/deployment_modes.svg)
+![](/images/deployment_modes.svg)
 
 Application mode: 启动一个jobmanager执行任务；Flink applicaiton运行在jobmanager上。
 
