@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>ETL | Bsj&#39;s Blog</title>
+  <title>Flink文件系统-常用配置 | Bsj&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="ETLETL 是 extract-transform-load的缩写，用来描述将数据从来源端经过抽取、转换、加载至目的端的过程。是数据仓库有关的技术。 ETL是将业务系统的数据经过抽取、清洗转换之后加载到数据仓库的过程，目的是将企业零散、标准不一的数据整合到一起，为企业的决策提供分析依据。ETL是BI(商业智能)的一个重要环节。 对于这种技术，一般常见的是ETL和ELT混合使用，通常越大量的数据、">
+  <meta name="description" content="Flink文件系统 - 常用配置Flink提供了多种跨所有文件系统的标准配置。 默认的文件系统如果文件路径没有显示地指定scheme&#x2F;authoriy，那么将会使用默认的scheme&#x2F;authoriy。 fs.default-scheme: &lt;default-fs&gt;  例如：如果一个默认的系统配置是：fs.default-scheme: hdfs:&#x2F;&#x2F;localhost:9000&#x2F;，那">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ETL">
-<meta property="og:url" content="https://zzti-bsj.github.io/2021/07/14/ETL/index.html">
+<meta property="og:title" content="Flink文件系统-常用配置">
+<meta property="og:url" content="https://zzti-bsj.github.io/2021/07/14/Flink%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%20-%20%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="Bsj&#39;s Blog">
-<meta property="og:description" content="ETLETL 是 extract-transform-load的缩写，用来描述将数据从来源端经过抽取、转换、加载至目的端的过程。是数据仓库有关的技术。 ETL是将业务系统的数据经过抽取、清洗转换之后加载到数据仓库的过程，目的是将企业零散、标准不一的数据整合到一起，为企业的决策提供分析依据。ETL是BI(商业智能)的一个重要环节。 对于这种技术，一般常见的是ETL和ELT混合使用，通常越大量的数据、">
+<meta property="og:description" content="Flink文件系统 - 常用配置Flink提供了多种跨所有文件系统的标准配置。 默认的文件系统如果文件路径没有显示地指定scheme&#x2F;authoriy，那么将会使用默认的scheme&#x2F;authoriy。 fs.default-scheme: &lt;default-fs&gt;  例如：如果一个默认的系统配置是：fs.default-scheme: hdfs:&#x2F;&#x2F;localhost:9000&#x2F;，那">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-07-14T14:02:19.553Z">
 <meta property="article:modified_time" content="2021-07-14T14:02:19.553Z">
 <meta property="article:author" content="Shaojie">
-<meta property="article:tag" content="Open-Tech">
+<meta property="article:tag" content="Flink">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Bsj's Blog" type="application/atom+xml">
@@ -70,9 +70,9 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-ETL" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Flink文件系统 - 常用配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2021/07/14/ETL/" class="article-date">
+    <a href="/2021/07/14/Flink%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%20-%20%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/" class="article-date">
   <time class="dt-published" datetime="2021-07-14T14:02:19.553Z" itemprop="datePublished">2021-07-14</time>
 </a>
     
@@ -84,7 +84,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      ETL
+      Flink文件系统-常用配置
     </h1>
   
 
@@ -92,18 +92,30 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="ETL"><a href="#ETL" class="headerlink" title="ETL"></a>ETL</h2><p>ETL 是 extract-transform-load的缩写，用来描述将数据从来源端经过抽取、转换、加载至目的端的过程。是数据仓库有关的技术。</p>
-<p>ETL是将业务系统的数据经过抽取、清洗转换之后加载到数据仓库的过程，目的是将企业零散、标准不一的数据整合到一起，为企业的决策提供分析依据。ETL是BI(商业智能)的一个重要环节。</p>
-<p>对于这种技术，一般常见的是ETL和ELT混合使用，通常越大量的数据、复杂的转换逻辑、目的端为较强运算能力的数据库，越偏向使用ELT，以便运用目的端数据库的平行处理能力。</p>
+        <h2 id="Flink文件系统-常用配置"><a href="#Flink文件系统-常用配置" class="headerlink" title="Flink文件系统 - 常用配置"></a>Flink文件系统 - 常用配置</h2><p>Flink提供了多种跨所有文件系统的标准配置。</p>
+<h3 id="默认的文件系统"><a href="#默认的文件系统" class="headerlink" title="默认的文件系统"></a>默认的文件系统</h3><p>如果文件路径没有显示地指定scheme/authoriy，那么将会使用默认的scheme/authoriy。</p>
+<pre><code class="yaml">fs.default-scheme: &lt;default-fs&gt;
+</code></pre>
+<p>例如：如果一个默认的系统配置是：<code>fs.default-scheme: hdfs://localhost:9000/</code>，那么文件路径为<code>/user/in.txt</code>的文件路径将会被解释为：<code>hdfs://localhost:9000/user/in.txt</code>。</p>
+<h3 id="连接限制"><a href="#连接限制" class="headerlink" title="连接限制"></a>连接限制</h3><p>为了限制文件系统的连接，可以在Flink的配置中添加如下条目：</p>
+<pre><code class="yaml">fs.&lt;scheme&gt;.limit.total: (number, 0/-1 mean no limit)
+fs.&lt;scheme&gt;.limit.input: (number, 0/-1 mean no limit)
+fs.&lt;scheme&gt;.limit.output: (number, 0/-1 mean no limit)
+fs.&lt;scheme&gt;.limit.timeout: (milliseconds, 0 means infinite)
+fs.&lt;scheme&gt;.limit.stream-timeout: (milliseconds, 0 means infinite)
+</code></pre>
+<p>可以通过<code>fs.&lt;scheme&gt;.limit.input</code>和<code>fs.&lt;scheme&gt;.limit.output</code>来分别设置Flink的连接数，也可以通过<code>fs.&lt;scheme&gt;.limit.total</code>来限制文件流的连接总数，如果文件系统尝试更多的连接，那么这些连接操作将被阻塞直到其他的连接断开；某文件流的连接时长超过<code>fs.&lt;scheme&gt;.limit.timeout</code>限制的大小，将会连接失败。</p>
+<p>为了防止无效流连接占满连接池，可以添加一个无效超时<code>fs.&lt;scheme&gt;.limit.stream-timeout</code>来关闭在这段时间内没有读/写任何字节的流连接。</p>
+<p>这些限制基于每一个TaskManager/filesystem。因为文件系统的创建发生在每一个scheme/authority，所以不同的authorities拥有独立的连接池。例如：<code>hdfs://myhdfs:50010/</code> and <code>hdfs://anotherhdfs:4399/</code>将会具有不同的连接池。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://zzti-bsj.github.io/2021/07/14/ETL/" data-id="ckr3jz1h300010mo8e23u077e" data-title="ETL" class="article-share-link">Teilen</a>
+      <a data-url="https://zzti-bsj.github.io/2021/07/14/Flink%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%20-%20%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/" data-id="ckr3jz1hb00060mo80py2ap1a" data-title="Flink文件系统-常用配置" class="article-share-link">Teilen</a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Open-Tech/" rel="tag">Open-Tech</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flink/" rel="tag">Flink</a></li></ul>
 
     </footer>
   </div>
@@ -111,10 +123,19 @@
     
 <nav id="article-nav">
   
+    <a href="/2021/07/14/Flink%E5%85%A5%E9%97%A8%E5%AE%9E%E6%93%8D/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          Flink入门实操
+        
+      </div>
+    </a>
   
-    <a href="/2021/07/14/Flink%20%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2021/07/14/Flink%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">Flink文件系统</div>
+      <div class="article-nav-title">Flink概览-three modes</div>
     </a>
   
 </nav>
